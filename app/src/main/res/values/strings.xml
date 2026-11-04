@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GlucoWidget</string>
+    <string name="widget_name">Glucosa (LibreLinkUp)</string>
+    <string name="widget_description">Muestra la última lectura de glucosa de LibreLinkUp</string>
+    <string name="placeholder_value">---</string>
+    <string name="tap_to_configure">Toca para actualizar</string>
+
+    <string name="intro">Introduce tu cuenta de LibreLinkUp (la de quien sigue al paciente). Las credenciales se guardan cifradas en este teléfono y solo se envían a los servidores de LibreView.</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="units">Unidades</string>
+    <string name="mgdl">mg/dL</string>
+    <string name="mmol">mmol/L</string>
+    <string name="low_threshold">Límite bajo (mg/dL)</string>
+    <string name="high_threshold">Límite alto (mg/dL)</string>
+    <string name="patient">Paciente</string>
+    <string name="test">Probar conexión</string>
+    <string name="save">Guardar</string>
+    <string name="testing">Conectando…</string>
+    <string name="disclaimer">Este widget usa una API no oficial y puede fallar o ir con retraso. No lo uses para decisiones de tratamiento: confirma siempre con tu sensor o la app oficial.</string>
+</resources>
