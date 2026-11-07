@@ -27,6 +27,22 @@ de una cuenta **LibreLinkUp** (valor, flecha de tendencia, hora y color según r
 
 También puedes abrir el proyecto en Android Studio y ejecutarlo (`./gradlew assembleDebug`).
 
+## iPhone (Scriptable)
+
+En iPhone no se pueden instalar apps sin firmarlas con Apple, así que la versión de iPhone
+es un script para la app gratuita **Scriptable**:
+
+1. Instala **Scriptable** desde la App Store.
+2. Abre [`ios/GlucoWidget.js`](ios/GlucoWidget.js), pulsa *Raw* y copia todo el texto.
+3. En Scriptable pulsa **+**, pega el texto y ponle de nombre *GlucoWidget*.
+4. Pulsa ▶︎ para ejecutarlo: te pedirá correo, contraseña, unidades y límites.
+5. Mantén pulsada la pantalla de inicio → **+** → *Scriptable* → elige el tamaño pequeño.
+   Mantén pulsado el widget → *Editar widget* → *Script*: **GlucoWidget**.
+   También funciona en la pantalla de bloqueo.
+
+iOS decide cuándo refrescar el widget (normalmente cada 5–15 minutos); el texto
+"hace X min" se actualiza solo. La cuenta se guarda en el Llavero del iPhone.
+
 ## Si deja de funcionar
 
 - *"Abre la app LibreLinkUp y acepta los términos"*: entra en la app oficial y acepta lo

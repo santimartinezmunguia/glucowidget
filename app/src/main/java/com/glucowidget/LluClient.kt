@@ -94,8 +94,9 @@ class LluClient(private val prefs: Prefs) {
             ?: login(email, password).also { prefs.session = it }
 
         var (code, json) = request(session.baseUrl, "/llu/connections", "GET", null, session)
-        if (code == 401 || code == 403) {
-            // Token caducado o revocado: una nueva sesión y un solo reintento.
+        if (code != 429 && !isGoodConnections(code, json)) {
+            // A veces LibreView responde HTTP 200 pero con un error dentro (status != 0) o sin
+            // la lista: la sesión guardada ya no sirve. Nueva sesión y un solo reintento.
             session = login(email, password).also { prefs.session = it }
             val retry = request(session.baseUrl, "/llu/connections", "GET", null, session)
             code = retry.first
@@ -103,8 +104,21 @@ class LluClient(private val prefs: Prefs) {
         }
         if (code == 429) throw LluException("LibreView limita las peticiones; espera unos minutos")
         if (code !in 200..299 || json == null) throw LluException("Error al leer datos (HTTP $code)")
+        val status = json.optInt("status", 0)
+        if (status != 0) {
+            val msg = json.optJSONObject("error")?.optString("message")
+            throw LluException(if (msg.isNullOrEmpty()) "LibreView devolvió un error (estado $status)" else msg)
+        }
+        val arr = json.optJSONArray("data") ?: throw LluException("Respuesta inesperada de LibreView")
 
-        val arr = json.optJSONArray("data") ?: return emptyList()
+        // LibreView renueva el token en cada respuesta; guardamos el nuevo.
+        json.optJSONObject("ticket")?.let { t ->
+            val token = t.optString("token")
+            if (token.isNotEmpty()) {
+                prefs.session = session.copy(token = token, expiresEpochSec = t.optLong("expires", session.expiresEpochSec))
+            }
+        }
+
         return (0 until arr.length()).map { i ->
             val c = arr.getJSONObject(i)
             Connection(
@@ -115,6 +129,11 @@ class LluClient(private val prefs: Prefs) {
             )
         }
     }
+
+    /** Respuesta válida: HTTP 2xx, status 0 y una lista con al menos una persona. */
+    private fun isGoodConnections(code: Int, json: JSONObject?): Boolean =
+        code in 200..299 && json != null && json.optInt("status", 0) == 0 &&
+            (json.optJSONArray("data")?.length() ?: 0) > 0
 
     private fun parseReading(m: JSONObject): Reading? {
         val mgdl = m.optDouble("ValueInMgPerDl", Double.NaN)
