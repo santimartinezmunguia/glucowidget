@@ -15,6 +15,17 @@ android {
         versionName = "1.1"
     }
 
+    // Llave de depuración fija (no secreta) para que cada APK de GitHub se pueda
+    // instalar encima del anterior sin desinstalar.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
