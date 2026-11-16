@@ -99,6 +99,68 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/tg_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/tg_help"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/tg_token"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tg_token"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/tg_find"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tg_find" />
+
+        <EditText
+            android:id="@+id/tg_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tg_chat"
+            android:importantForAutofill="no"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/urgent_low"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/urgent_low"
+            android:importantForAutofill="no"
+            android:inputType="number" />
+
+        <CheckBox
+            android:id="@+id/alerts_enabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tg_enabled" />
+
+        <Button
+            android:id="@+id/tg_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tg_test" />
+
+        <TextView
+            android:id="@+id/tg_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
         <Button
             android:id="@+id/save"
             android:layout_width="match_parent"

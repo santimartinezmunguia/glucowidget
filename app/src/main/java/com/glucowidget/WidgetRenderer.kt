@@ -84,7 +84,7 @@ object WidgetRenderer {
         return views
     }
 
-    private fun arrowFor(trend: Int): String = when (trend) {
+    fun arrowFor(trend: Int): String = when (trend) {
         1 -> "↓"
         2 -> "↘"
         3 -> "→"

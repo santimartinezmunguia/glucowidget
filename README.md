@@ -27,6 +27,22 @@ de una cuenta **LibreLinkUp** (valor, flecha de tendencia, hora y color según r
 
 También puedes abrir el proyecto en Android Studio y ejecutarlo (`./gradlew assembleDebug`).
 
+## Alertas por Telegram (y en tu reloj)
+
+GlucoWidget puede mandarte un mensaje de Telegram cuando la glucosa está **muy baja**
+(por defecto < 55), **baja**, **alta** o cuando **no llegan lecturas** en 20 min, y otro cuando
+vuelves a rango. Si sigue igual, repite el aviso: muy baja cada 10 min, baja cada 20, alta y
+sin lecturas cada 60. Si tu reloj recibe notificaciones de Telegram, también te llegan ahí.
+
+1. En Telegram, abre **@BotFather**, envía `/newbot`, ponle un nombre y copia el **token**.
+2. Abre el bot que acabas de crear y envíale `/start`.
+3. En GlucoWidget pega el token, pulsa **Detectar mi chat** y luego **Enviar mensaje de prueba**.
+4. Marca *Enviar alertas* y pulsa **Guardar**.
+
+Importante: la app revisa cada ~5 min, pero Android puede retrasarlo para ahorrar batería.
+En *Ajustes → Apps → GlucoWidget → Batería* elige **Sin restricciones**. En el reloj, en la app
+Huawei Health, activa las notificaciones de **Telegram**. No sustituye a las alarmas oficiales.
+
 ## iPhone (Scriptable)
 
 En iPhone no se pueden instalar apps sin firmarlas con Apple, así que la versión de iPhone

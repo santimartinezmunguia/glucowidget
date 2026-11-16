@@ -45,6 +45,33 @@ class Prefs(context: Context) {
         get() = sp.getString("lastError", null)
         set(v) = sp.edit { putString("lastError", v) }
 
+    // --- Alertas por Telegram ---
+
+    var tgToken: String?
+        get() = sp.getString("tgToken", null)
+        set(v) = sp.edit { putString("tgToken", v) }
+
+    var tgChatId: String?
+        get() = sp.getString("tgChatId", null)
+        set(v) = sp.edit { putString("tgChatId", v) }
+
+    var alertsEnabled: Boolean
+        get() = sp.getBoolean("alertsEnabled", false)
+        set(v) = sp.edit { putBoolean("alertsEnabled", v) }
+
+    var urgentLowMgdl: Int
+        get() = sp.getInt("urgentLow", 55)
+        set(v) = sp.edit { putInt("urgentLow", v) }
+
+    /** Último estado avisado (nombre de [AlertState]) y cuándo se avisó. */
+    var alertState: String?
+        get() = sp.getString("alertState", null)
+        set(v) = sp.edit { putString("alertState", v) }
+
+    var alertSentAt: Long
+        get() = sp.getLong("alertSentAt", 0)
+        set(v) = sp.edit { putLong("alertSentAt", v) }
+
     // --- Sesión de LibreLinkUp (para no iniciar sesión en cada actualización) ---
 
     var session: Session?

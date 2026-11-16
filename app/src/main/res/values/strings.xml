@@ -19,4 +19,13 @@
     <string name="save">Guardar</string>
     <string name="testing">Conectando…</string>
     <string name="disclaimer">Este widget usa una API no oficial y puede fallar o ir con retraso. No lo uses para decisiones de tratamiento: confirma siempre con tu sensor o la app oficial.</string>
+
+    <string name="tg_title">Alertas por Telegram</string>
+    <string name="tg_help">1) En Telegram habla con @BotFather, envía /newbot y copia el token que te da.\n2) Abre tu bot nuevo y envíale /start.\n3) Pega aquí el token y pulsa «Detectar mi chat».\nLas alertas llegan como mensajes de Telegram (y a tu reloj si tiene activadas las notificaciones de Telegram).</string>
+    <string name="tg_token">Token del bot</string>
+    <string name="tg_find">Detectar mi chat</string>
+    <string name="tg_chat">ID del chat</string>
+    <string name="urgent_low">Límite muy bajo (mg/dL)</string>
+    <string name="tg_enabled">Enviar alertas: baja, muy baja, alta y sin lecturas</string>
+    <string name="tg_test">Enviar mensaje de prueba</string>
 </resources>

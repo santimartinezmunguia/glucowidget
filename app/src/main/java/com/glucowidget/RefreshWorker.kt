@@ -35,12 +35,20 @@ class RefreshWorker(context: Context, params: WorkerParameters) : CoroutineWorke
         } finally {
             WidgetRenderer.renderAll(applicationContext)
         }
+        Alerts.check(prefs, prefs.lastReading)
+        // Si este trabajo es el de la cadena, se encadena el siguiente; si no, solo se
+        // arranca la cadena cuando no existe (KEEP), para no duplicarla.
+        scheduleNext(applicationContext, fromChain = tags.contains(NEXT))
         Result.success()
     }
 
     companion object {
         private const val PERIODIC = "glucose-periodic"
         private const val NOW = "glucose-now"
+        private const val NEXT = "glucose-next"
+
+        /** Cada 5 min mientras el sistema lo permita; el trabajo periódico queda de respaldo. */
+        private const val NEXT_MINUTES = 5L
 
         private val network = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -63,10 +71,21 @@ class RefreshWorker(context: Context, params: WorkerParameters) : CoroutineWorke
                 .enqueueUniqueWork(NOW, ExistingWorkPolicy.REPLACE, req)
         }
 
+        fun scheduleNext(context: Context, fromChain: Boolean = false) {
+            val req = OneTimeWorkRequestBuilder<RefreshWorker>()
+                .setConstraints(network)
+                .setInitialDelay(NEXT_MINUTES, TimeUnit.MINUTES)
+                .addTag(NEXT)
+                .build()
+            val policy = if (fromChain) ExistingWorkPolicy.APPEND_OR_REPLACE else ExistingWorkPolicy.KEEP
+            WorkManager.getInstance(context).enqueueUniqueWork(NEXT, policy, req)
+        }
+
         fun cancelAll(context: Context) {
             WorkManager.getInstance(context).apply {
                 cancelUniqueWork(PERIODIC)
                 cancelUniqueWork(NOW)
+                cancelUniqueWork(NEXT)
             }
         }
     }
